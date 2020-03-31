@@ -1,0 +1,17 @@
+---
+logging:
+  level:
+    ROOT: warn
+spring:
+    datasource:
+        # Postgres connection information.
+#      url: jdbc:postgresql://localhost:5432/product
+#      username: 'product'
+#      password: 'product'
+
+      # SQL Server
+      url: jdbc:sqlserver://localhost;applicationName=product-service;sendStringParametersAsUnicode=false
+      username: 'sa'
+      password: 'Your_password123'
+    jackson:
+      default-property-inclusion: non-null

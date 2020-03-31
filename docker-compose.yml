@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+  build-docker-network:
+    driver: bridge
+
+volumes:
+  db-data:
+
+services:
+# Uncomment this to setup postgres in a docker container:
+#  postgres:
+#    container_name: postgres
+#    image: postgres:11.5
+#    networks:
+#      - build-docker-network
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#     - db-data:/var/lib/postgresql/data
+#    environment:
+#     - POSTGRES_USER=product
+#     - POSTGRES_PASSWORD=product
+
+# Uncomment this to setup ms sql server in a docker container:
+  ms-sql-server:
+    container_name: ms-sql-server
+    image: "mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04"
+    networks:
+      - build-docker-network
+    ports:
+      - "1433:1433"
+    volumes:
+      - db-data:/var/opt/mssql
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"

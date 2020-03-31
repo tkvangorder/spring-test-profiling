@@ -1,0 +1,28 @@
+:sectlinks:
+:sectanchors:
+:stylesheet: asciidoctor.css
+// If not rendered on github, we use fonts for the captions, otherwise, we assign github emojis. DO NOT PUT A BLANK LINE BEFORE THIS, the ICONS don't render.
+ifndef::env-github[]
+:icons: font
+endif::[]
+ifdef::env-github[]
+:important-caption: :exclamation:
+:warning-caption: :x:
+:caution-caption: :hand:
+:note-caption: :bulb:
+:tip-caption: :mag:
+endif::[]
+
+# Overview 
+
+This is a sandbox for experimenting with Spring Test adding micrometer to measure various aspects of the framework. 
+
+The initial version of this project was to measure how much overhead adding @Transactional to your test. This was done by adding micrometer timers in a customer version of the TestContextManager and then bootstrapping that manager rather than the default.
+
+To get this working:
+
+. you need to start up the docker container for MS SQL Server via `docker-compose up`
+. Run the non-transactional integration tests, these do not have the `@Transactional` annotation.
+. After running the tests, a report will be printed to show the times spend within each Listener. Note the 'beforeTestMethod' and 'afterTestMethod' restuls for the `TransactionalTestExecutionListener`
+. Run the transactional integration tests,these have the `@Transactional` annotation.
+. After running the tests, a report will be printed to show the times spend within each Listener. Note the 'beforeTestMethod' and 'afterTestMethod' restuls for the `TransactionalTestExecutionListener` is significantly larger.
